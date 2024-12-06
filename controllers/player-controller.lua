@@ -10,10 +10,26 @@ end
 function PlayerController:update(deltaTime)
   if love.mouse.isDown(1) and not self.player.isJumping then
     local x, y = love.mouse.getPosition()
+
     local oldRadius = self.player.radius
     local newRadius = self.player.radius * self.player.radiusMultiplier
 
-    flux.to(self.player, self.player.transitionTime, { radius = newRadius })
+    local jumpOffsetX, jumpOffsetY
+
+    if x > self.player.x then
+      jumpOffsetX = self.player.x - self.player.jumpOffset
+    else
+      jumpOffsetX = self.player.x + self.player.jumpOffset
+    end
+
+    if y > self.player.y then
+      jumpOffsetY = self.player.y - self.player.jumpOffset
+    else
+      jumpOffsetY = self.player.y + self.player.jumpOffset
+    end
+
+    flux.to(self.player, self.player.transitionTime,
+      { x = jumpOffsetX, y = jumpOffsetY, radius = newRadius })
         :onstart(function()
           self.player.isJumping = true
         end)
