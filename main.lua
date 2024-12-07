@@ -12,5 +12,6 @@ function love.update(deltaTime)
 end
 
 function love.draw()
+  love.graphics.clear(1, 1, 1)
   player:draw()
 end
