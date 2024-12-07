@@ -5,9 +5,6 @@ local PlayerController = class("PlayerController")
 local function movePlayer(playerController)
   local x, y = love.mouse.getPosition()
 
-  local oldRadius = playerController.player.radius
-  local newRadius = playerController.player.radius * playerController.player.radiusMultiplier
-
   local jumpOffsetX, jumpOffsetY
 
   if x > playerController.player.x then
@@ -22,13 +19,17 @@ local function movePlayer(playerController)
     jumpOffsetY = playerController.player.y + playerController.player.jumpOffset
   end
 
+  local oldScaleX = playerController.player.scaleX
+  local oldScaleY = playerController.player.scaleY
+
   flux.to(playerController.player, playerController.player.transitionTime,
-    { x = jumpOffsetX, y = jumpOffsetY, radius = newRadius })
+    { x = jumpOffsetX, y = jumpOffsetY, scaleX = 1, scaleY = 1 })
       :onstart(function()
         playerController.player.isJumping = true
       end)
       :oncomplete(function()
-        flux.to(playerController.player, playerController.player.transitionTime, { x = x, y = y, radius = oldRadius })
+        flux.to(playerController.player, playerController.player.transitionTime,
+          { x = x, y = y, scaleX = oldScaleX, scaleY = oldScaleY })
             :oncomplete(function()
               playerController.player.isJumping = false
             end)

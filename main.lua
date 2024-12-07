@@ -6,6 +6,7 @@ local enemiesController = require 'controllers.enemies-controller'
 function love.load()
   math.randomseed(os.time())
   love.mouse.setGrabbed(true)
+
   player:load()
   enemiesController:load()
   timer:load()
@@ -20,6 +21,7 @@ end
 
 function love.draw()
   love.graphics.clear(1, 1, 1)
+
   enemiesController:draw()
   player:draw()
   timer:draw()
