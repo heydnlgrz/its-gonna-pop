@@ -1,6 +1,6 @@
 local class = require 'libraries.30log'
-local PlayerController = class("PlayerController")
 local flux = require "libraries.flux"
+local PlayerController = class("PlayerController")
 
 function PlayerController:load(player)
   self.player = player
@@ -31,8 +31,7 @@ function PlayerController:update(deltaTime)
     jumpOffsetY = self.player.y + self.player.jumpOffset
   end
 
-  flux.to(self.player, self.player.transitionTime,
-    { x = jumpOffsetX, y = jumpOffsetY, radius = newRadius })
+  flux.to(self.player, self.player.transitionTime, { x = jumpOffsetX, y = jumpOffsetY, radius = newRadius })
       :onstart(function()
         self.player.isJumping = true
       end)
