@@ -34,10 +34,6 @@ local function setVertices(enemy)
   }
 end
 
-local function getRandomSpeed()
-  return math.random(25, 175)
-end
-
 local function updatePosition(enemy, deltaTime)
   enemy.x = enemy.x + enemy.speedX * deltaTime
   enemy.y = enemy.y + enemy.speedY * deltaTime
@@ -82,8 +78,14 @@ function Enemy:load(x, y)
   self.sideLenght = 25
   self.insideCanvas = false
   self.height = (math.sqrt(3) / 2) * self.sideLenght
+
+  local function getRandomSpeed()
+    return math.random(25, 175)
+  end
+
   self.speedX = getRandomSpeed()
   self.speedY = getRandomSpeed()
+
   self.rotation = 0
   self.rotationSpeed = math.rad(math.random(-360, 360))
 
