@@ -3,11 +3,26 @@ local Enemy = class("Enemy")
 
 local function setVertices(enemy)
   local halfSideLenght = enemy.sideLenght / 2
-  local y = enemy.y + (1 / 3) * enemy.height
+  local height = enemy.height
 
-  local x1, y1 = enemy.x, enemy.y - (2 / 3) * enemy.height
-  local x2, y2 = enemy.x - halfSideLenght, y
-  local x3, y3 = enemy.x + halfSideLenght, y
+  local x1, y1 = 0, -(2 / 3) * height
+  local x2, y2 = -halfSideLenght, (1 / 3) * height
+  local x3, y3 = halfSideLenght, (1 / 3) * height
+
+  local function rotatePoint(x, y)
+    local cosTheta = math.cos(enemy.rotation)
+    local sinTheta = math.sin(enemy.rotation)
+
+    return x * cosTheta - y * sinTheta, x * sinTheta + y * cosTheta
+  end
+
+  x1, y1 = rotatePoint(x1, y1)
+  x2, y2 = rotatePoint(x2, y2)
+  x3, y3 = rotatePoint(x3, y3)
+
+  x1, y1 = x1 + enemy.x, y1 + enemy.y
+  x2, y2 = x2 + enemy.x, y2 + enemy.y
+  x3, y3 = x3 + enemy.x, y3 + enemy.y
 
   enemy.vertices = {
     x1 = x1,
@@ -69,6 +84,8 @@ function Enemy:load(x, y)
   self.height = (math.sqrt(3) / 2) * self.sideLenght
   self.speedX = getRandomSpeed()
   self.speedY = getRandomSpeed()
+  self.rotation = 0
+  self.rotationSpeed = math.rad(math.random(-360, 360))
 
   if self.x > love.graphics.getWidth() then
     self.speedX = -self.speedX
@@ -84,6 +101,7 @@ function Enemy:load(x, y)
 end
 
 function Enemy:update(deltaTime)
+  self.rotation = self.rotation + self.rotationSpeed * deltaTime
   move(self, deltaTime)
 end
 
