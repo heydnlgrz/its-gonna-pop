@@ -2,7 +2,7 @@ local class = require 'libraries.30log'
 local Timer = class("Timer")
 
 function Timer:load()
-  self.font = love.graphics.newFont(32)
+  self.font = love.graphics.newFont(24)
   self.elapsedTime = 0
 end
 
@@ -17,7 +17,7 @@ function Timer:draw()
 
   love.graphics.setFont(self.font)
   love.graphics.setColor(0, 0, 1)
-  love.graphics.print(timeString, love.graphics.getWidth() - 110, 10)
+  love.graphics.print(timeString, love.graphics.getWidth() - 80, 10)
 end
 
 return Timer

@@ -11,13 +11,13 @@ local function spawn(enemiesController)
     x = love.math.random(0, love.graphics.getWidth())
     y = -spawnOffset
   elseif side == 2 then
+    x = love.graphics.getWidth() + spawnOffset
+    y = love.math.random(0, love.graphics.getHeight())
+  elseif side == 3 then
     x = love.math.random(0, love.graphics.getWidth())
     y = love.graphics.getHeight() + spawnOffset
-  elseif side == 3 then
-    x = -spawnOffset
-    y = love.math.random(0, love.graphics.getHeight())
   else
-    x = love.graphics.getWidth() + spawnOffset
+    x = -spawnOffset
     y = love.math.random(0, love.graphics.getHeight())
   end
 
@@ -28,6 +28,7 @@ end
 
 function EnemiesController:load()
   self.spawnInterval = 1
+  self.maxEnemies = 25
   self.lastSpawnTime = love.timer.getTime()
   self.enemies = {}
 
@@ -37,7 +38,8 @@ end
 function EnemiesController:update(deltaTime)
   local currentTime = love.timer.getTime()
 
-  if currentTime - self.lastSpawnTime >= self.spawnInterval then
+  if currentTime - self.lastSpawnTime >= self.spawnInterval
+      and #self.enemies < self.maxEnemies then
     spawn(self)
     self.lastSpawnTime = currentTime
   end

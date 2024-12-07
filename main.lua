@@ -4,6 +4,7 @@ local timer = require 'ui.timer'
 local enemiesController = require 'controllers.enemies-controller'
 
 function love.load()
+  math.randomseed(os.time())
   love.mouse.setGrabbed(true)
   player:load()
   enemiesController:load()
