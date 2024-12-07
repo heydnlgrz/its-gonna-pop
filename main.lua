@@ -20,7 +20,7 @@ end
 
 function love.draw()
   love.graphics.clear(1, 1, 1)
-  player:draw()
   enemiesController:draw()
+  player:draw()
   timer:draw()
 end
