@@ -19,7 +19,7 @@ function Player:update(deltaTime)
 end
 
 function Player:draw()
-  love.graphics.setColor(0, 0, 0)
+  love.graphics.setColor(0, 1, 0)
   love.graphics.circle(self.mode, self.x, self.y, self.radius)
 end
 

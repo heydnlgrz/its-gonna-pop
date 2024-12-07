@@ -16,7 +16,7 @@ function Timer:draw()
   local timeString = string.format("%02d:%02d", minutes, seconds)
 
   love.graphics.setFont(self.font)
-  love.graphics.setColor(1, 0, 0)
+  love.graphics.setColor(0, 0, 1)
   love.graphics.print(timeString, love.graphics.getWidth() - 110, 10)
 end
 
