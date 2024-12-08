@@ -10,13 +10,16 @@ local function checkCollision(collisionController, player, enemies, gameOverCanv
 
     local squaredDistance = math.pow(player.x - enemy.x, 2) + math.pow(player.y - enemy.y, 2)
 
-    if math.sqrt(squaredDistance) <= playerRadius + enemyHalfHeight then
+    if math.sqrt(squaredDistance) <= playerRadius + enemyHalfHeight and not player.isJumping then
       love.graphics.setCanvas(gameOverCanvas)
-      love.graphics.clear()
       love.graphics.setFont(collisionController.font)
       love.graphics.setColor(1, 0, 0)
       love.graphics.print("Game over!", love.graphics.getWidth() / 2 - 200, love.graphics.getHeight() / 2 - 50)
       love.graphics.setCanvas()
+
+      hasCollided = true
+
+      break
     end
   end
 
@@ -30,7 +33,10 @@ function CollisionController:load(player)
 end
 
 function CollisionController:update(deltaTime, player, enemies, gameOverCanvas)
-  checkCollision(self, player, enemies, gameOverCanvas)
+  print(player.isJumping)
+  if checkCollision(self, player, enemies, gameOverCanvas) then
+    return true
+  end
 end
 
 return CollisionController

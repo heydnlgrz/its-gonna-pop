@@ -5,6 +5,7 @@ local enemiesController   = require 'controllers.enemies-controller'
 local collisionController = require 'libraries.collision'
 
 local gameOverCanvas
+local gameStopped         = false
 
 function love.load()
   gameOverCanvas = love.graphics.newCanvas()
@@ -19,11 +20,19 @@ function love.load()
 end
 
 function love.update(deltaTime)
+  enemiesController:update(deltaTime)
+
+  if gameStopped then
+    return
+  end
+
   player:update(deltaTime)
   flux.update(deltaTime)
   timer:update(deltaTime)
-  enemiesController:update(deltaTime)
-  collisionController:update(deltaTime, player, enemiesController.enemies, gameOverCanvas)
+
+  if collisionController:update(deltaTime, player, enemiesController.enemies, gameOverCanvas) then
+    gameStopped = true
+  end
 end
 
 function love.draw()
@@ -32,6 +41,5 @@ function love.draw()
   enemiesController:draw()
   player:draw()
   timer:draw()
-
   love.graphics.draw(gameOverCanvas, 0, 0)
 end
