@@ -108,7 +108,7 @@ function Enemy:update(deltaTime)
 end
 
 function Enemy:draw()
-  love.graphics.setColor(1, 0, 0)
+  love.graphics.setColor(0, 1, 0)
 
   love.graphics.polygon(
     self.mode,

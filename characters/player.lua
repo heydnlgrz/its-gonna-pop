@@ -1,6 +1,6 @@
 local playerController = require 'controllers.player-controller'
-local class = require 'libraries.30log'
-local Player = class("Player")
+local class            = require 'libraries.30log'
+local Player           = class("Player")
 
 function Player:load()
   self.mode = "fill"

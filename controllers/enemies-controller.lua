@@ -1,5 +1,5 @@
-local class = require 'libraries.30log'
-local enemyClass = require 'characters.enemy'
+local class             = require 'libraries.30log'
+local enemyClass        = require 'characters.enemy'
 local EnemiesController = class("EnemiesController")
 
 local function spawn(enemiesController)

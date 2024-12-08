@@ -1,5 +1,5 @@
-local class = require 'libraries.30log'
-local flux = require "libraries.flux"
+local class            = require 'libraries.30log'
+local flux             = require "libraries.flux"
 local PlayerController = class("PlayerController")
 
 local function movePlayer(playerController)
