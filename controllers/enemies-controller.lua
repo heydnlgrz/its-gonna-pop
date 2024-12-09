@@ -28,7 +28,7 @@ end
 
 function EnemiesController:load()
   self.spawnInterval = 1
-  self.maxEnemies = 25
+  self.maxEnemies = 50
   self.lastSpawnTime = love.timer.getTime()
   self.enemies = {}
 
