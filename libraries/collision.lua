@@ -33,7 +33,6 @@ function CollisionController:load(player)
 end
 
 function CollisionController:update(deltaTime, player, enemies, gameOverCanvas)
-  print(player.isJumping)
   if checkCollision(self, player, enemies, gameOverCanvas) then
     return true
   end
